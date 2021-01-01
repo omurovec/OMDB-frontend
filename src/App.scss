@@ -1,0 +1,173 @@
+$bg-color: #F6F6F6;
+$alt-text: rgba(0,0,0,0.5);
+
+html {
+
+    h2 {
+        font-size: 18px;
+    }
+
+    #root {
+        display: flex;
+        width: 100vw;
+        min-height: 100vh;
+        background-color: $bg-color;
+        justify-content: center;
+
+        .App {
+            width: 100%;
+            max-width: 1024px;
+
+            .container {
+                margin: 10px;
+                background-color: #FFF;
+                border-radius: 10px;
+                box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+            }
+
+            .searchbar {
+                position: relative;
+                display: flex;
+                height: 40px;
+                overflow: hidden;
+                margin-top: 5vh;
+                margin-bottom: 20px;
+
+                img {
+                    position: absolute;
+                    height: 16px;
+                    width: 16px;
+                    left: 12px;
+                    top: 12px;
+                    bottom: 12px;
+                }
+
+                input {
+                    flex: 1;
+                    border: none;
+                    text-align: center;
+                    font-weight: 500;
+                    font-size: 14px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+
+            .row-wrapper {
+                display: flex;
+                flex-direction: row;
+
+                .container {
+                    flex: 1;
+
+                    h2 {
+                        margin: 15px;
+                        color: $alt-text;
+                    }
+                }
+            }
+
+            .list {
+                padding: 0;
+                margin-top: 0;
+                list-style-type: none;
+
+                li {
+                    display: flex;
+                    flex-direction: row;
+
+                    .poster {
+                        width: 70px;
+                        height: 100px;
+                        margin: 15px;
+                        border-radius: 5px;
+                        object-fit: cover;
+                    }
+
+                    div {
+                        margin: 10px 0;
+
+                        h3 {
+                            margin: 10px 0 0 0;
+                        }
+
+                        p {
+                            text-align: left;
+                            margin: 5px;
+
+                            &.see-more {
+                                color: #000;
+                            }
+                        }
+
+                        .year {
+                            color: $alt-text;
+                        }
+                    }
+
+                    .award {
+                        width: 30px;
+                        height: 30px;
+                        margin: auto 30px auto auto;
+                    }
+                }
+
+                p {
+                    margin: 30px 0;
+                    text-align: center;
+                    color: $alt-text;
+                }
+
+                .load-more:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    html {
+
+        #root {
+
+            .App {
+
+                .searchbar {
+                    margin: 20px;
+                    margin-bottom: 10px;
+                }
+
+                .row-wrapper {
+
+                    .toggle {
+                        list-style-type: none;
+                        display: flex;
+                        padding: 0;
+                        flex-direction: row;
+                        margin: 20px;
+                        margin-bottom: 0;
+
+                        h2 {
+                            margin: 0 10px;
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+
+                            &.focused{
+                                color: #000;
+                            }
+                        }
+                    }
+
+                    .container {
+                        margin: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
