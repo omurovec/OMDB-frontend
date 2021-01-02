@@ -58,6 +58,8 @@ html #root {
           margin: 15px;
           border-radius: 5px;
           object-fit: cover; }
+          html #root .App .list li .poster:hover {
+            cursor: pointer; }
         html #root .App .list li div {
           margin: 10px 0;
           width: 250px;
@@ -74,6 +76,8 @@ html #root {
               color: #000; }
           html #root .App .list li div .year {
             color: rgba(0, 0, 0, 0.5); }
+          html #root .App .list li div:hover {
+            cursor: pointer; }
         html #root .App .list li .award {
           width: 30px;
           height: 30px;
@@ -86,8 +90,94 @@ html #root {
         color: rgba(0, 0, 0, 0.5); }
       html #root .App .list .load-more:hover {
         cursor: pointer; }
+    html #root .App #more-info {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      html #root .App #more-info .container {
+        position: relative;
+        width: 100%;
+        max-width: 1024px;
+        margin: 0;
+        box-sizing: border-box;
+        padding: 30px; }
+        html #root .App #more-info .container .exit {
+          position: absolute;
+          top: 30px;
+          right: 30px;
+          width: 40px;
+          height: 40px; }
+          html #root .App #more-info .container .exit:hover {
+            cursor: pointer; }
+        html #root .App #more-info .container .info {
+          display: flex;
+          flex-direction: row;
+          align-items: center; }
+          html #root .App #more-info .container .info .poster {
+            width: auto;
+            height: 210px;
+            max-width: 30%;
+            border-radius: 5px;
+            margin: 30px;
+            object-fit: cover; }
+          html #root .App #more-info .container .info .title {
+            display: flex;
+            flex-direction: row;
+            align-items: center; }
+            html #root .App #more-info .container .info .title h1 {
+              margin: 0;
+              font-size: 36px; }
+            html #root .App #more-info .container .info .title img {
+              width: 30px;
+              height: 30px;
+              margin: 15px 30px; }
+              html #root .App #more-info .container .info .title img:hover {
+                cursor: pointer; }
+          html #root .App #more-info .container .info .text {
+            margin: 30px; }
+            html #root .App #more-info .container .info .text h4 {
+              margin: 10px 0; }
+        html #root .App #more-info .container .plot {
+          margin: 30px;
+          margin-top: 0;
+          font-weight: 500;
+          font-size: 18; }
 
 @media (max-width: 1023px) {
+  html #root .App #more-info .container {
+    width: 90%;
+    height: 90%; }
+    html #root .App #more-info .container .exit {
+      top: 15px;
+      right: 15px; }
+    html #root .App #more-info .container .scroll-content {
+      height: 100%;
+      width: 100%;
+      overflow: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: 0; }
+      html #root .App #more-info .container .scroll-content::-webkit-scrollbar {
+        display: none; }
+      html #root .App #more-info .container .scroll-content .info {
+        align-items: center;
+        flex-direction: column; }
+        html #root .App #more-info .container .scroll-content .info .poster {
+          max-width: 100%; }
+        html #root .App #more-info .container .scroll-content .info .text {
+          box-sizing: border-box;
+          margin: 0;
+          width: 100%;
+          padding: 30px; }
+          html #root .App #more-info .container .scroll-content .info .text .title h1 {
+            max-width: 80%; }
+          html #root .App #more-info .container .scroll-content .info .text .title img {
+            margin: auto 0 auto auto; }
   html #root .App .searchbar {
     margin: 20px;
     margin-bottom: 10px; }

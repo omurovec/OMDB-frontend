@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { SearchBar, Toggle, ListContainer } from './Components';
+import { SearchBar, Toggle, ListContainer, MoreInfo } from './Components';
 import { searchMovies, getNextPage } from './omdb';
 import { useSelector } from 'react-redux';
 
@@ -69,6 +69,7 @@ function App() {
             </>
         }
       </div>
+      <MoreInfo/>
     </div>
   );
 }

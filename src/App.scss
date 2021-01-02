@@ -1,5 +1,6 @@
 $bg-color: #F6F6F6;
 $alt-text: rgba(0,0,0,0.5);
+$bg-shadow: rgba(0,0,0,0.5);
 
 html {
 
@@ -85,6 +86,10 @@ html {
                         margin: 15px;
                         border-radius: 5px;
                         object-fit: cover;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
 
                     div {
@@ -105,11 +110,16 @@ html {
 
                             &.see-more {
                                 color: #000;
+
                             }
                         }
 
                         .year {
                             color: $alt-text;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
                         }
                     }
 
@@ -134,6 +144,90 @@ html {
                     cursor: pointer;
                 }
             }
+
+            #more-info {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: $bg-shadow;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .container {
+                    position: relative;
+                    width: 100%;
+                    max-width: 1024px;
+                    margin: 0;
+                    box-sizing: border-box;
+                    padding: 30px;
+
+                    .exit {
+                        position: absolute;
+                        top: 30px;
+                        right: 30px;
+                        width: 40px;
+                        height: 40px;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .info {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        .poster {
+                            width: auto;
+                            height: 210px;
+                            max-width: 30%;
+                            border-radius: 5px;
+                            margin: 30px;
+                            object-fit: cover;
+                        }
+
+                        .title {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+
+                            h1 {
+                                margin: 0;
+                                font-size: 36px;
+                            }
+
+                            img {
+                                width: 30px;
+                                height: 30px;
+                                margin: 15px 30px;
+
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+
+                        .text {
+                            margin: 30px;
+
+                            h4 {
+                                margin: 10px 0;
+                            }
+                        }
+                    }
+
+                    .plot {
+                        margin: 30px;
+                        margin-top: 0;
+                        font-weight: 500;
+                        font-size: 18;
+                    }
+                }
+            }
         }
     }
 }
@@ -144,6 +238,57 @@ html {
         #root {
 
             .App {
+
+                #more-info {
+
+                    .container {
+                        width: 90%;
+                        height: 90%;
+
+                        .exit {
+                            top: 15px;
+                            right: 15px;
+                        }
+
+                        .scroll-content {
+                            height: 100%;
+                            width: 100%;
+                            overflow: scroll;
+                            -ms-overflow-style: none;
+                            scrollbar-width: 0;
+
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+
+                            .info {
+                                align-items: center;
+                                flex-direction: column;
+
+                                .poster {
+                                    max-width: 100%;
+                                }
+
+                                .text {
+                                    box-sizing: border-box;
+                                    margin: 0;
+                                    width: 100%;
+                                    padding: 30px;
+
+                                    .title {
+                                        h1 {
+                                            max-width: 80%;
+                                        }
+
+                                        img {
+                                            margin: auto 0 auto auto;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
                 .searchbar {
                     margin: 20px;

@@ -1,5 +1,7 @@
 import env from './env';
-import { store, searchSlice } from './Store';
+import { store, searchSlice, moreInfoSlice } from './Store';
+
+const BASE_URL = "http://www.omdbapi.com/?";
 
 function JSON_to_urlencoded(obj) {
     let url = '';
@@ -15,7 +17,7 @@ function searchMovies(title) {
         s: title
     }
 
-    fetch(`http://www.omdbapi.com/?${JSON_to_urlencoded(options)}`)
+    fetch(BASE_URL + JSON_to_urlencoded(options))
         .then(resp => resp.json())
         .then((body) => {
             store.dispatch(searchSlice.actions.newSearch({
@@ -29,7 +31,7 @@ function searchMovies(title) {
         })
 }
 
-async function getNextPage() {
+function getNextPage() {
     const { search, resultsRemaining } = store.getState();
 
     // Check if there is another page
@@ -42,7 +44,7 @@ async function getNextPage() {
             page: String(search.page + 1)
         }
 
-        fetch(`http://www.omdbapi.com/?${JSON_to_urlencoded(options)}`)
+        fetch(BASE_URL + JSON_to_urlencoded(options))
             .then(resp => resp.json())
             .then(body => {
                 store.dispatch(searchSlice.actions.nextPage({
@@ -55,4 +57,21 @@ async function getNextPage() {
     }
 }
 
-export { searchMovies, getNextPage };
+function getMovieData(id) {
+    const options = {
+        apikey: env.OMDB_API_KEY,
+        i: id,
+        plot: "full"
+    };
+
+    fetch(BASE_URL + JSON_to_urlencoded(options))
+        .then(resp => resp.json())
+        .then(body => {
+            store.dispatch(moreInfoSlice.actions.setData(body));
+        })
+        .catch(err => {
+            console.warn(err);
+        });
+}
+
+export { searchMovies, getNextPage, getMovieData };

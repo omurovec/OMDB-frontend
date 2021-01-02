@@ -1,8 +1,12 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Award, AwardFilled, Search, Poster } from './Icons/';
-import { store, nominationsSlice } from './Store';
+import { Award, AwardFilled, Search, Poster, Exit } from './Icons/';
+import { store, nominationsSlice, moreInfoSlice } from './Store';
+import { getMovieData } from './omdb';
 
 const selectNominationIDs = state => state.nominations.nominations.map(item => item.imdbID);
+const selectMoreInfoID = state => state.moreInfo.id;
+const selectMoreInfoData = state => state.moreInfo.data;
 
 const SearchBar = (props) => (
   <div className="container searchbar">
@@ -31,19 +35,22 @@ const Toggle = (props) => (
 const ListItem = (props) => (
   <li>
     <img
+      onClick={() => {
+        store.dispatch(moreInfoSlice.actions.setID(props.imdbID));
+      }}
       src={props.Poster === "N/A" ? Poster : props.Poster}
       alt="poster"
       className="poster"/>
-    <div>
+    <div onClick={() => {
+        store.dispatch(moreInfoSlice.actions.setID(props.imdbID));
+      }}>
       <h3>
         {props.Title}
         {/* <span className="year"> - {props.Year}</span> */}
       </h3>
       <p>{props.Year}</p>
       <p>{props.Type}</p>
-      <p className="see-more" onClick={() => {
-          //TODO: Open Model
-      }}>
+      <p className="see-more">
         See more...
       </p>
     </div>
@@ -86,4 +93,75 @@ const ListContainer = (props) => {
   );
 }
 
-export { SearchBar, Toggle, ListContainer };
+const MoreInfo = (props) => {
+  const imdbID = useSelector(selectMoreInfoID);
+  const data = useSelector(selectMoreInfoData);
+  const nominations = useSelector(selectNominationIDs);
+  const [selected, setSelected] = useState();
+
+  useEffect(() => {
+    if(imdbID && !data) {
+      getMovieData(imdbID);
+    }
+  }, [imdbID, data]);
+
+  useEffect(() => {
+    setSelected(nominations.indexOf(imdbID)+1);
+  }, [nominations, imdbID])
+
+  return imdbID ?
+      <div id="more-info">
+        {data?
+         <div className="container">
+           <img
+             onClick={() => {
+               store.dispatch(moreInfoSlice.actions.wipeMoreInfo());
+             }}
+             className="exit"
+             src={Exit}
+             alt="exit"/>
+           <div className="scroll-content">
+              <div className="info">
+                <img
+                    src={data.Poster === "N/A" ? Poster : data.Poster}
+                    alt="poster"
+                    className="poster"/>
+                <div className="text">
+                  <div className="title">
+                    <h1>{data.Title}</h1>
+                    <img
+                      onClick={() => {
+                        selected ?
+                          store.dispatch(nominationsSlice.actions.removeNom(imdbID))
+                        :
+                          store.dispatch(nominationsSlice.actions.addNom({
+                            Title: data.Title,
+                            Year: data.Year,
+                            Type: data.Type,
+                            Poster: data.Poster,
+                            imdbID,
+                          }));
+                      }}
+                      src={selected?AwardFilled:Award}
+                      className="award"
+                      alt="award"/>
+                  </div>
+                  <h4>Release Date: {data.Released}</h4>
+                  <h4>Rated: {data.Rated}</h4>
+                  <h4>Rating: {data.imdbRating}</h4>
+                  <h4>Runtime: {data.Runtime}</h4>
+                  <h4>Genre: {data.Genre}</h4>
+                </div>
+              </div>
+              <p className="plot">{data.Plot}</p>
+           </div>
+         </div>
+         :
+         null
+        }
+      </div>
+    :
+      null
+}
+
+export { SearchBar, Toggle, ListContainer, MoreInfo };
