@@ -4,7 +4,7 @@ import { store, searchSlice } from './Store';
 function JSON_to_urlencoded(obj) {
     let url = '';
     Object.keys(obj).forEach((key) => {
-        url += `${key}=${obj[key].replace('&', 'and').replace('=', '').replace(' ', '+')}&`
+        url += `${key}=${encodeURIComponent(obj[key])}&`
     })
     return url.slice(0, -1);
 }
