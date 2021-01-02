@@ -3,16 +3,17 @@ import { createSlice, configureStore } from '@reduxjs/toolkit';
 const nominationsSlice = createSlice({
     name: 'nominations',
     initialState: {
-        nominations: []
+        nominations: getNominations()
     },
     reducers: {
         addNom: (state, action) => {
             state.nominations.push(action.payload);
         },
         removeNom: (state, action) => {
-            state.nominations = state.nominations.filter((item) =>
-                                                         item.imdbID !== action.payload
-                                                        );
+            state.nominations = state.nominations
+                                    .filter((item) =>
+                                        item.imdbID !== action.payload
+                                    );
         }
     }
 });
@@ -70,5 +71,22 @@ const store = configureStore({
         moreInfo: moreInfoSlice.reducer
     },
 });
+
+function getNominations() {
+    try {
+        const nominations = JSON.parse(localStorage.getItem('nominations')) ?? [];
+        return nominations;
+    } catch(err) {
+        console.warn(err);
+        return [];
+    }
+}
+
+function storeNominations() {
+    const { nominations } = store.getState();
+    localStorage.setItem('nominations', JSON.stringify(nominations.nominations));
+}
+
+store.subscribe(storeNominations);
 
 export { nominationsSlice, searchSlice, moreInfoSlice, store };
