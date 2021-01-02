@@ -6,13 +6,14 @@ import { useSelector } from 'react-redux';
 
 const selectResultsRemaining = state => state.search.resultsRemaining;
 const selectNominations = state => state.nominations;
+const selectResults = state => state.search.results;
 
 function App() {
   const resultsRemaining = useSelector(selectResultsRemaining);
   const nominations = useSelector(selectNominations);
+  const results = useSelector(selectResults);
   const [width, setWidth] = useState(window.innerWidth);
   const [searchText, setSearchText] = useState('');
-  const [results, setResults] = useState([]);
   const [focused, setFocused] = useState(0);
 
   useEffect(() => {
@@ -23,18 +24,12 @@ function App() {
 
   useEffect(() => {
     if(searchText) {
-      searchMovies(searchText).then((searchResults => {
-        setResults(searchResults);
-      }));
+      searchMovies(searchText);
     }
   }, [searchText]);
 
   const loadMore = () => {
-    getNextPage().then((searchResults) => {
-      setResults([...results, ...searchResults]);
-    }).catch(err => {
-      console.warn(err);
-    })
+    getNextPage();
   }
 
   return (

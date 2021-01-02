@@ -10,36 +10,32 @@ function JSON_to_urlencoded(obj) {
 }
 
 function searchMovies(title) {
-    return new Promise((resolve, reject) => {
-        const options = {
-            apikey: env.OMDB_API_KEY,
-            s: title
-        }
+    const options = {
+        apikey: env.OMDB_API_KEY,
+        s: title
+    }
 
-        fetch(`http://www.omdbapi.com/?${JSON_to_urlencoded(options)}`)
-            .then(resp => resp.json())
-            .then((body) => {
-                store.dispatch(searchSlice.actions.newSearch({
-                    totalResults: Number(body.totalResults),
-                    newResults: body.Search?.length,
-                    searchText: title
-                }));
-                resolve(body.Search);
-            }).catch(err => {
-                reject(err);
-            })
-    })
+    fetch(`http://www.omdbapi.com/?${JSON_to_urlencoded(options)}`)
+        .then(resp => resp.json())
+        .then((body) => {
+            store.dispatch(searchSlice.actions.newSearch({
+                totalResults: Number(body.totalResults),
+                newResults: body.Search?.length,
+                searchText: title,
+                results: body.Search
+            }));
+        }).catch(err => {
+            console.warn(err);
+        })
 }
 
 async function getNextPage() {
-    return new Promise((resolve, reject) => {
-        const { search, resultsRemaining } = store.getState();
+    const { search, resultsRemaining } = store.getState();
 
-        // Check if there is another page
-        if(resultsRemaining <= 0) {
-            reject(new Error("No more results"));
-        }
-
+    // Check if there is another page
+    if(resultsRemaining <= 0) {
+        console.warn(new Error("No more results"));
+    } else {
         const options = {
             apikey: env.OMDB_API_KEY,
             s: search.searchText,
@@ -50,15 +46,13 @@ async function getNextPage() {
             .then(resp => resp.json())
             .then(body => {
                 store.dispatch(searchSlice.actions.nextPage({
-                    newResults: body.Search.length
+                    newResults: body.Search
                 }));
-                console.log(body);
-                resolve(body.Search);
             })
             .catch(err => {
-                reject(new Error(err));
-            })
-    })
+                console.warn(err);
+            });
+    }
 }
 
 export { searchMovies, getNextPage };

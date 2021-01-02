@@ -27,19 +27,22 @@ const searchSlice = createSlice({
         totalResults: 0,
         resultsRemaining: 0,
         page: 0,
-        searchText: ''
+        searchText: '',
+        results: [],
     },
     reducers: {
         newSearch: (state, action) => {
-            const { totalResults, newResults, searchText } = action.payload;
+            const { results, totalResults, newResults, searchText } = action.payload;
             state.totalResults = totalResults;
             state.resultsRemaining = totalResults - newResults;
             state.page = 1;
             state.searchText = searchText;
+            state.results = results;
         },
         nextPage: (state, action) => {
             state.page++;
-            state.resultsRemaining -= action.payload.newResults;
+            state.resultsRemaining -= action.payload.newResults.length;
+            state.results = [...state.results, ...action.payload.newResults];
         }
     }
 });
