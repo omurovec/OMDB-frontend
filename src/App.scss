@@ -1,6 +1,7 @@
 $bg-color: #F6F6F6;
 $alt-text: rgba(0,0,0,0.5);
 $bg-shadow: rgba(0,0,0,0.5);
+$green: #27AE60;
 
 html {
 
@@ -53,6 +54,28 @@ html {
                     &:focus {
                         outline: none;
                     }
+                }
+            }
+
+            .banner {
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                border: solid 2px $green;
+                transition-duration: 100ms;
+
+                h3 {
+                    margin: 0;
+                    color: $green;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                &.hidden {
+                    height: 0px;
+                    border-width: 0px;
                 }
             }
 
@@ -228,6 +251,10 @@ html {
                     }
                 }
             }
+
+            .award.disabled {
+                opacity: 0.1;
+            }
         }
     }
 }
@@ -292,7 +319,11 @@ html {
 
                 .searchbar {
                     margin: 20px;
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
+                }
+
+                .banner {
+                    margin: 0 20px;
                 }
 
                 .row-wrapper {

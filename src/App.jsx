@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { SearchBar, Toggle, ListContainer, MoreInfo } from './Components';
+import { SearchBar, Banner, Toggle, ListContainer, MoreInfo } from './Components';
 import { searchMovies, getNextPage } from './omdb';
 import { useSelector } from 'react-redux';
 
@@ -35,6 +35,7 @@ function App() {
   return (
     <div className="App">
       <SearchBar onFocus={() => {setFocused(0)}} onChange={setSearchText}/>
+      <Banner text="5/5 Nominations Selected"/>
       <div className="row-wrapper">
         {
           width < 1024 ?

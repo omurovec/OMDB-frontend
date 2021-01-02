@@ -36,6 +36,22 @@ html #root {
         font-size: 14px; }
         html #root .App .searchbar input:focus {
           outline: none; }
+    html #root .App .banner {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: solid 2px #27AE60;
+      transition-duration: 100ms; }
+      html #root .App .banner h3 {
+        margin: 0;
+        color: #27AE60;
+        font-size: 14px;
+        font-weight: 600; }
+      html #root .App .banner.hidden {
+        height: 0px;
+        border-width: 0px; }
     html #root .App .row-wrapper {
       display: flex;
       flex-direction: row; }
@@ -148,6 +164,8 @@ html #root {
           margin-top: 0;
           font-weight: 500;
           font-size: 18; }
+    html #root .App .award.disabled {
+      opacity: 0.1; }
 
 @media (max-width: 1023px) {
   html #root .App #more-info .container {
@@ -180,7 +198,9 @@ html #root {
             margin: auto 0 auto auto; }
   html #root .App .searchbar {
     margin: 20px;
-    margin-bottom: 10px; }
+    margin-bottom: 20px; }
+  html #root .App .banner {
+    margin: 0 20px; }
   html #root .App .row-wrapper .toggle {
     list-style-type: none;
     display: flex;

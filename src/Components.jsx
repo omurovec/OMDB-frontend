@@ -7,6 +7,7 @@ import { getMovieData } from './omdb';
 const selectNominationIDs = state => state.nominations.nominations.map(item => item.imdbID);
 const selectMoreInfoID = state => state.moreInfo.id;
 const selectMoreInfoData = state => state.moreInfo.data;
+const selectMaxNominations = state => state.nominations.nominations.length >= 5;
 
 const SearchBar = (props) => (
   <div className="container searchbar">
@@ -18,6 +19,16 @@ const SearchBar = (props) => (
       placeholder="Search"/>
   </div>
 );
+
+const Banner = (props) => {
+  const maxNominations = useSelector(selectMaxNominations);
+
+  return (
+    <div className={`banner container ${maxNominations?null:"hidden"}`}>
+      <h3>{props.text}</h3>
+    </div>
+  )
+}
 
 const Toggle = (props) => (
   <ul className="toggle">
@@ -32,41 +43,46 @@ const Toggle = (props) => (
   </ul>
 )
 
-const ListItem = (props) => (
-  <li>
-    <img
-      onClick={() => {
-        store.dispatch(moreInfoSlice.actions.setID(props.imdbID));
-      }}
-      src={props.Poster === "N/A" ? Poster : props.Poster}
-      alt="poster"
-      className="poster"/>
-    <div onClick={() => {
-        store.dispatch(moreInfoSlice.actions.setID(props.imdbID));
-      }}>
-      <h3>
-        {props.Title}
-        {/* <span className="year"> - {props.Year}</span> */}
-      </h3>
-      <p>{props.Year}</p>
-      <p>{props.Type}</p>
-      <p className="see-more">
-        See more...
-      </p>
-    </div>
-    <img
-      onClick={() => {
-        props.selected ?
-          store.dispatch(nominationsSlice.actions.removeNom(props.imdbID))
-        :
-          store.dispatch(nominationsSlice.actions.addNom(props));
-      }}
-      src={props.selected ? AwardFilled : Award}
-      alt="award"
-      className="award"
-    />
-  </li>
-)
+const ListItem = (props) => {
+  const maxNominations = useSelector(selectMaxNominations);
+
+  return (
+    <li>
+      <img
+        onClick={() => {
+          store.dispatch(moreInfoSlice.actions.setID(props.imdbID));
+        }}
+        src={props.Poster === "N/A" ? Poster : props.Poster}
+        alt="poster"
+        className="poster"/>
+      <div onClick={() => {
+          store.dispatch(moreInfoSlice.actions.setID(props.imdbID));
+        }}>
+        <h3>
+          {props.Title}
+          {/* <span className="year"> - {props.Year}</span> */}
+        </h3>
+        <p>{props.Year}</p>
+        <p>{props.Type}</p>
+        <p className="see-more">
+          See more...
+        </p>
+      </div>
+      <img
+        onClick={() => {
+          if(props.selected) {
+            store.dispatch(nominationsSlice.actions.removeNom(props.imdbID))
+          } else if(!maxNominations) {
+              store.dispatch(nominationsSlice.actions.addNom(props));
+          }
+        }}
+        src={props.selected ? AwardFilled : Award}
+        alt="award"
+        className={`award ${maxNominations&&!props.selected?'disabled':null}`}
+      />
+    </li>
+  )
+}
 
 const ListContainer = (props) => {
   const nominationIDs = useSelector(selectNominationIDs);
@@ -97,6 +113,7 @@ const MoreInfo = (props) => {
   const imdbID = useSelector(selectMoreInfoID);
   const data = useSelector(selectMoreInfoData);
   const nominations = useSelector(selectNominationIDs);
+  const maxNominations = useSelector(selectMaxNominations);
   const [selected, setSelected] = useState();
 
   useEffect(() => {
@@ -131,19 +148,20 @@ const MoreInfo = (props) => {
                     <h1>{data.Title}</h1>
                     <img
                       onClick={() => {
-                        selected ?
+                        if(selected) {
                           store.dispatch(nominationsSlice.actions.removeNom(imdbID))
-                        :
-                          store.dispatch(nominationsSlice.actions.addNom({
-                            Title: data.Title,
-                            Year: data.Year,
-                            Type: data.Type,
-                            Poster: data.Poster,
-                            imdbID,
-                          }));
+                        } else if(!maxNominations) {
+                            store.dispatch(nominationsSlice.actions.addNom({
+                                          Title: data.Title,
+                                          Year: data.Year,
+                                          Type: data.Type,
+                                          Poster: data.Poster,
+                                          imdbID,
+                                        }));
+                        }
                       }}
                       src={selected?AwardFilled:Award}
-                      className="award"
+                      className={`award ${maxNominations&&!selected?"disabled":null}`}
                       alt="award"/>
                   </div>
                   <h4>Release Date: {data.Released}</h4>
@@ -164,4 +182,4 @@ const MoreInfo = (props) => {
       null
 }
 
-export { SearchBar, Toggle, ListContainer, MoreInfo };
+export { SearchBar, Banner, Toggle, ListContainer, MoreInfo };
