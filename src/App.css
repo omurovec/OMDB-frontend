@@ -40,7 +40,8 @@ html #root {
       display: flex;
       flex-direction: row; }
       html #root .App .row-wrapper .container {
-        flex: 1; }
+        width: 50%;
+        height: 100%; }
         html #root .App .row-wrapper .container h2 {
           margin: 15px;
           color: rgba(0, 0, 0, 0.5); }
@@ -102,6 +103,7 @@ html #root {
       html #root .App .row-wrapper .toggle h2.focused {
         color: #000; }
   html #root .App .row-wrapper .container {
-    margin: 20px; } }
+    margin: 20px;
+    width: 100%; } }
 
 /*# sourceMappingURL=App.css.map */

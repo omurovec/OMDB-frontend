@@ -60,7 +60,8 @@ html {
                 flex-direction: row;
 
                 .container {
-                    flex: 1;
+                    width: 50%;
+                    height: 100%;
 
                     h2 {
                         margin: 15px;
@@ -170,6 +171,7 @@ html {
 
                     .container {
                         margin: 20px;
+                        width: 100%;
                     }
                 }
             }
