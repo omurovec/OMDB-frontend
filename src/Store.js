@@ -1,11 +1,5 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const storedNominations = {
-    nominations: [
-        // TODO: Load from webStorage
-    ]
-}
-
 const nominationsSlice = createSlice({
     name: 'nominations',
     initialState: {
@@ -16,7 +10,9 @@ const nominationsSlice = createSlice({
             state.nominations.push(action.payload);
         },
         removeNom: (state, action) => {
-            state.nominations = state.nominations.filter((item) => item !== action.payload);
+            state.nominations = state.nominations.filter((item) =>
+                                                         item.imdbID !== action.payload
+                                                        );
         }
     }
 });
@@ -52,7 +48,6 @@ const store = configureStore({
         nominations: nominationsSlice.reducer,
         search: searchSlice.reducer
     },
-    preloadedState: storedNominations
 });
 
 export { nominationsSlice, searchSlice, store };

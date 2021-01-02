@@ -5,7 +5,7 @@ import { searchMovies, getNextPage } from './omdb';
 import { useSelector } from 'react-redux';
 
 const selectResultsRemaining = state => state.search.resultsRemaining;
-const selectNominations = state => state.nominations;
+const selectNominations = state => state.nominations.nominations;
 const selectResults = state => state.search.results;
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
                         labels={["Results", "Nominations"]}/>}
               title={focused === 0 ? "Results" : "Nominations"}
               data={focused === 0 ? results : nominations}
-              altFooter={resultsRemaining && results ?
+              altFooter={focused === 0 && resultsRemaining && results ?
                          <p className="load-more" onClick={loadMore}>
                             Load more...
                          </p>

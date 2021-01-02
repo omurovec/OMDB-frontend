@@ -117,6 +117,10 @@ html {
                         width: 30px;
                         height: 30px;
                         margin: auto 30px auto auto;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
 
