@@ -13,6 +13,7 @@ const SearchBar = (props) => (
   <div className="container searchbar">
     <img src={Search} alt="search"/>
     <input
+      onFocus={props.onFocus}
       onChange={(e) => {
         props.onChange(e.target.value);
       }}
