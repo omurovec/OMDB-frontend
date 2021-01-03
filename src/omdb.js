@@ -1,6 +1,6 @@
 import { store, searchSlice, moreInfoSlice } from './Store';
 
-const BASE_URL = "http://www.omdbapi.com/?";
+const BASE_URL = "https://www.omdbapi.com/?";
 
 function JSON_to_urlencoded(obj) {
     let url = '';
