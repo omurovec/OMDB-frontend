@@ -1,4 +1,3 @@
-import env from './env';
 import { store, searchSlice, moreInfoSlice } from './Store';
 
 const BASE_URL = "http://www.omdbapi.com/?";
@@ -13,7 +12,7 @@ function JSON_to_urlencoded(obj) {
 
 function searchMovies(title) {
     const options = {
-        apikey: env.OMDB_API_KEY,
+        apikey: process.env.REACT_APP_OMDB_API_KEY,
         s: title
     }
 
@@ -39,7 +38,7 @@ function getNextPage() {
         console.warn(new Error("No more results"));
     } else {
         const options = {
-            apikey: env.OMDB_API_KEY,
+            apikey: process.env.REACT_APP_OMDB_API_KEY,
             s: search.searchText,
             page: String(search.page + 1)
         }
@@ -59,7 +58,7 @@ function getNextPage() {
 
 function getMovieData(id) {
     const options = {
-        apikey: env.OMDB_API_KEY,
+        apikey: process.env.REACT_APP_OMDB_API_KEY,
         i: id,
         plot: "full"
     };
