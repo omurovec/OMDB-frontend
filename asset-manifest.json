@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/OMDB-frontend/static/css/main.51921b73.chunk.css",
-    "main.js": "/OMDB-frontend/static/js/main.4a392986.chunk.js",
-    "main.js.map": "/OMDB-frontend/static/js/main.4a392986.chunk.js.map",
+    "main.js": "/OMDB-frontend/static/js/main.896e580d.chunk.js",
+    "main.js.map": "/OMDB-frontend/static/js/main.896e580d.chunk.js.map",
     "runtime-main.js": "/OMDB-frontend/static/js/runtime-main.993f0ad5.js",
     "runtime-main.js.map": "/OMDB-frontend/static/js/runtime-main.993f0ad5.js.map",
     "static/js/2.d308eb56.chunk.js": "/OMDB-frontend/static/js/2.d308eb56.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.993f0ad5.js",
     "static/js/2.d308eb56.chunk.js",
     "static/css/main.51921b73.chunk.css",
-    "static/js/main.4a392986.chunk.js"
+    "static/js/main.896e580d.chunk.js"
   ]
 }
