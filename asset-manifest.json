@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/OMDB-frontend/static/css/main.51921b73.chunk.css",
+    "main.css": "/OMDB-frontend/static/css/main.7f908bd9.chunk.css",
     "main.js": "/OMDB-frontend/static/js/main.870a6372.chunk.js",
     "main.js.map": "/OMDB-frontend/static/js/main.870a6372.chunk.js.map",
     "runtime-main.js": "/OMDB-frontend/static/js/runtime-main.993f0ad5.js",
@@ -10,7 +10,7 @@
     "static/js/3.12308f59.chunk.js": "/OMDB-frontend/static/js/3.12308f59.chunk.js",
     "static/js/3.12308f59.chunk.js.map": "/OMDB-frontend/static/js/3.12308f59.chunk.js.map",
     "index.html": "/OMDB-frontend/index.html",
-    "static/css/main.51921b73.chunk.css.map": "/OMDB-frontend/static/css/main.51921b73.chunk.css.map",
+    "static/css/main.7f908bd9.chunk.css.map": "/OMDB-frontend/static/css/main.7f908bd9.chunk.css.map",
     "static/js/2.d308eb56.chunk.js.LICENSE.txt": "/OMDB-frontend/static/js/2.d308eb56.chunk.js.LICENSE.txt",
     "static/media/award-filled.dd259c80.svg": "/OMDB-frontend/static/media/award-filled.dd259c80.svg",
     "static/media/award.8fa1bf15.svg": "/OMDB-frontend/static/media/award.8fa1bf15.svg",
@@ -20,7 +20,7 @@
   "entrypoints": [
     "static/js/runtime-main.993f0ad5.js",
     "static/js/2.d308eb56.chunk.js",
-    "static/css/main.51921b73.chunk.css",
+    "static/css/main.7f908bd9.chunk.css",
     "static/js/main.870a6372.chunk.js"
   ]
 }
